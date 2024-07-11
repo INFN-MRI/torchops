@@ -1,6 +1,6 @@
 # TorchOps
 
-`OperationMixin` is a Python library that extends the functionality of PyTorch's `nn.Module` with additional mathematical operations and transformations. This library provides an abstract base class that supports various linear algebra operations such as addition, subtraction, multiplication, division, and more. It is designed for use in machine learning and scientific computing tasks where such operations are frequently needed.
+`TorchOps` is a Python library that extends the functionality of PyTorch's `nn.Module` with additional mathematical operations and transformations. This library provides an abstract base class that supports various linear algebra operations such as addition, subtraction, multiplication, division, and more. It is designed for use in machine learning and scientific computing tasks where such operations are frequently needed.
 
 ## Features
 
