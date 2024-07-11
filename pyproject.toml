@@ -1,0 +1,28 @@
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "torchops"
+version = "0.0.1.alpha"
+authors = [{name = "Matteo Cencini", email = "matteo.cencini@gmail.com"}]
+description = "A thin Pyxu-like wrapper around DeepInverse."
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = ["MRI", "GEHC", "Pulseq", "TOPPE"]
+license = {text = "MIT"}
+classifiers = ["Programming Language :: Python :: 3"]
+dependencies = [
+   "deepinv@git+https://github.com/INFN-MRI/deepinv.git@main", # until next pypulseq release
+]
+
+[project.optional-dependencies]
+dev = ["black", "pytest", "ruff"]
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["torchops*"]
+exclude = ["torchops.tests*"]
+namespaces = false
