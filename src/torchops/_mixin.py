@@ -1,9 +1,10 @@
 """Operator algebra module."""
 
+
 class OperationMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)  # forwards all unused arguments
-        
+
     def __add__(self, other):
         if isinstance(other, self.__class__):
             return self._create_instance(AddOperation(self, other))
@@ -33,13 +34,13 @@ class OperationMixin:
         else:
             return self(other)
         return NotImplemented
-    
+
     def __pow__(self, scalar):
         if isinstance(scalar, (int)):
             ops = [self for n in range(scalar)]
             return self._create_instance(CompositeOperation(*ops))
         return NotImplemented
-    
+
     def __radd__(self, other):
         return self + other
 
@@ -51,7 +52,7 @@ class OperationMixin:
 
     def __rmatmul__(self, other):
         return self @ other
-            
+
     def to(self, *args, **kwargs):
         for prop in self.__dict__.keys():
             try:
@@ -75,8 +76,8 @@ class OperationMixin:
             return CompositeOperation(*operation.ops)
         else:
             raise ValueError("Unknown operation type")
-            
-            
+
+
 # %% Base operations
 class AddOperation(OperationMixin):
     def __init__(self, F, G):
@@ -87,6 +88,7 @@ class AddOperation(OperationMixin):
     def forward(self, x):
         return self.F(x) + self.G(x)
 
+
 class SubOperation(OperationMixin):
     def __init__(self, F, G):
         super().__init__()
@@ -95,6 +97,7 @@ class SubOperation(OperationMixin):
 
     def forward(self, x):
         return self.F(x) - self.G(x)
+
 
 class MulOperation(OperationMixin):
     def __init__(self, F, a):
@@ -105,6 +108,7 @@ class MulOperation(OperationMixin):
     def forward(self, x):
         return self.F(self.a * x)
 
+
 class DivOperation(OperationMixin):
     def __init__(self, F, a):
         super().__init__()
@@ -114,6 +118,7 @@ class DivOperation(OperationMixin):
     def forward(self, x):
         return self.F(x / self.a)
 
+
 class NegOperation(OperationMixin):
     def __init__(self, F):
         super().__init__()
@@ -121,6 +126,7 @@ class NegOperation(OperationMixin):
 
     def forward(self, x):
         return -self.F(x)
+
 
 class CompositeOperation(OperationMixin):
     def __init__(self, *ops):
@@ -132,5 +138,3 @@ class CompositeOperation(OperationMixin):
         for op in reversed(self.ops):
             output = op(output)
         return output
-
-
