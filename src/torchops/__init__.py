@@ -1,8 +1,8 @@
 """
 """
 
-from . import _base
-from ._base import *  # noqa
+from . import _linop
+from ._linop import *  # noqa
 
 __all__ = []
-__all__.extend(_base.__all__)
+__all__.extend(_linop.__all__)
